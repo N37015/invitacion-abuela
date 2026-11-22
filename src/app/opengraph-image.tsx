@@ -20,17 +20,15 @@ export default function OpenGraphImage() {
           fontFamily: 'Georgia, serif',
         }}
       >
-        {/* Cenefa superior Chiapaneca */}
         <div
           style={{
             width: '100%',
-            height: '18px',
+            height: '20px',
             background:
               'linear-gradient(90deg, #D61F69 0%, #EA580C 25%, #EAB308 50%, #15803D 75%, #0284C7 100%)',
           }}
         />
 
-        {/* Contenido central */}
         <div
           style={{
             display: 'flex',
@@ -67,7 +65,7 @@ export default function OpenGraphImage() {
 
           <div
             style={{
-              fontSize: 74,
+              fontSize: 72,
               fontWeight: 700,
               lineHeight: 1.1,
               color: '#FAF7F2',
@@ -76,7 +74,6 @@ export default function OpenGraphImage() {
             Magdalena Pacheco Roblero
           </div>
 
-          {/* Puntos bordados */}
           <div style={{ display: 'flex', gap: '14px', margin: '28px 0' }}>
             <div style={{ width: 14, height: 14, borderRadius: 99, background: '#D61F69' }} />
             <div style={{ width: 14, height: 14, borderRadius: 99, background: '#EA580C' }} />
@@ -96,11 +93,10 @@ export default function OpenGraphImage() {
           </div>
         </div>
 
-        {/* Cenefa inferior Chiapaneca */}
         <div
           style={{
             width: '100%',
-            height: '18px',
+            height: '20px',
             background:
               'linear-gradient(90deg, #0284C7 0%, #15803D 25%, #EAB308 50%, #EA580C 75%, #D61F69 100%)',
           }}
