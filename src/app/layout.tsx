@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Mis 74 Años · Magdalena Pacheco Roblero',
     description:
-      'Sábado 23 de enero de 2027 · 4:00 PM · Salón Jardín Guadalupe, Ocozocoautla, Chiapas.',
+      'Sábado 23 de enero de 2027 · 2:00 PM · Salón Jardín Guadalupe, Ocozocoautla, Chiapas.',
     url: 'https://abuelita-ashen.vercel.app',
     siteName: 'Mis 74 Años · Abuelita Magdalena',
     locale: 'es_MX',
