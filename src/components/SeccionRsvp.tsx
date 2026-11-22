@@ -1,6 +1,7 @@
 'use client';
 
 import { useActionState, useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { CheckCircle2, Heart, Send, Users } from 'lucide-react';
 import { registrarConfirmacion, EstadoRsvp } from '@/app/actions';
@@ -11,6 +12,9 @@ interface SaludoPublico {
   mensaje: string | null;
   creadoEn: Date;
 }
+
+const campo =
+  'w-full rounded-xl border border-[#D8CEC0] bg-[#FAF7F2]/60 px-4 py-3.5 text-base text-[#1F1B18] focus:outline-none focus:ring-2 focus:ring-[#D61F69] focus:border-transparent transition-shadow';
 
 export default function SeccionRsvp({
   saludos,
@@ -25,24 +29,33 @@ export default function SeccionRsvp({
 
   useEffect(() => {
     if (state?.ok) {
-      confetti({
-        particleCount: 85,
-        spread: 70,
-        origin: { y: 0.65 },
-        colors: ['#D61F69', '#EA580C', '#EAB308', '#15803D', '#0284C7'],
-      });
+      const colors = ['#D61F69', '#EA580C', '#EAB308', '#15803D', '#0284C7'];
+      confetti({ particleCount: 90, spread: 75, origin: { y: 0.65 }, colors });
+      setTimeout(
+        () => confetti({ particleCount: 50, angle: 60, spread: 60, origin: { x: 0, y: 0.7 }, colors }),
+        250
+      );
+      setTimeout(
+        () => confetti({ particleCount: 50, angle: 120, spread: 60, origin: { x: 1, y: 0.7 }, colors }),
+        250
+      );
     }
   }, [state]);
 
   return (
-    <section id="confirmar" className="py-16 px-4 max-w-4xl mx-auto">
-      <div className="bg-white rounded-3xl shadow-md border border-[#E6DDD0] overflow-hidden">
-        {/* Cenefa superior estilo listones de Chiapaneca */}
+    <section id="confirmar" className="relative z-10 py-12 sm:py-16 px-4 max-w-4xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 32 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        className="bg-white rounded-3xl shadow-md border border-[#E6DDD0] overflow-hidden"
+      >
         <div className="h-2 w-full borde-chiapaneca" />
 
-        <div className="p-6 sm:p-10">
+        <div className="p-5 sm:p-10">
           <div className="text-center max-w-lg mx-auto mb-8">
-            <span className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.25em] text-[#D61F69] font-semibold">
+            <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs uppercase tracking-[0.22em] text-[#D61F69] font-semibold">
               <Heart className="w-3.5 h-3.5 fill-[#D61F69]" /> Confirmación y Buenos Deseos
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl text-[#1F1B18] mt-2">
@@ -53,156 +66,183 @@ export default function SeccionRsvp({
             </p>
           </div>
 
-          {state?.ok ? (
-            <div className="bg-[#FDF2F8] border border-[#D61F69]/30 rounded-2xl p-6 text-center max-w-md mx-auto">
-              <CheckCircle2 className="w-12 h-12 text-[#D61F69] mx-auto mb-3" />
-              <h3 className="font-serif text-2xl text-[#1F1B18] font-semibold">
-                ¡Registro recibido!
-              </h3>
-              <p className="text-sm text-[#4A3F37] mt-2">{state.mensaje}</p>
-            </div>
-          ) : (
-            <form action={formAction} className="space-y-5 max-w-xl mx-auto">
-              <div>
-                <label className="block text-sm font-medium text-[#2C2520] mb-1.5">
-                  Tu nombre completo *
-                </label>
-                <input
-                  type="text"
-                  name="nombre"
-                  required
-                  placeholder="Ej. Familia Pérez Gómez"
-                  className="w-full rounded-xl border border-[#D8CEC0] bg-[#FAF7F2]/60 px-4 py-3 text-base text-[#1F1B18] focus:outline-none focus:ring-2 focus:ring-[#D61F69]"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-[#2C2520] mb-2">
-                  ¿Podrás acompañarnos el sábado 23 de enero?
-                </label>
-                <div className="grid grid-cols-2 gap-3">
-                  <label
-                    onClick={() => setAsistira('si')}
-                    className={`cursor-pointer rounded-xl border p-3.5 text-center text-sm font-medium transition-all ${
-                      asistira === 'si'
-                        ? 'border-[#D61F69] bg-[#FDF2F8] text-[#9D174D] shadow-xs'
-                        : 'border-[#D8CEC0] text-[#5C534B] hover:bg-[#FAF7F2]'
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="asistira"
-                      value="si"
-                      checked={asistira === 'si'}
-                      onChange={() => setAsistira('si')}
-                      className="sr-only"
-                    />
-                    ¡Sí, ahí estaremos!
-                  </label>
-
-                  <label
-                    onClick={() => setAsistira('no')}
-                    className={`cursor-pointer rounded-xl border p-3.5 text-center text-sm font-medium transition-all ${
-                      asistira === 'no'
-                        ? 'border-[#18181B] bg-[#F4F4F5] text-[#18181B] shadow-xs'
-                        : 'border-[#D8CEC0] text-[#5C534B] hover:bg-[#FAF7F2]'
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="asistira"
-                      value="no"
-                      checked={asistira === 'no'}
-                      onChange={() => setAsistira('no')}
-                      className="sr-only"
-                    />
-                    No podré asistir
-                  </label>
-                </div>
-              </div>
-
-              {asistira === 'si' && (
-                <div>
-                  <label className="block text-sm font-medium text-[#2C2520] mb-1.5">
-                    <span className="inline-flex items-center gap-1.5">
-                      <Users className="w-4 h-4 text-[#EA580C]" />
-                      Acompañantes adicionales (sin contarte a ti)
-                    </span>
-                  </label>
-                  <select
-                    name="acompanantes"
-                    defaultValue="0"
-                    className="w-full rounded-xl border border-[#D8CEC0] bg-[#FAF7F2]/60 px-4 py-3 text-base text-[#1F1B18] focus:outline-none focus:ring-2 focus:ring-[#D61F69]"
-                  >
-                    <option value="0">Voy solo(a)</option>
-                    <option value="1">+ 1 acompañante</option>
-                    <option value="2">+ 2 acompañantes</option>
-                    <option value="3">+ 3 acompañantes</option>
-                    <option value="4">+ 4 acompañantes</option>
-                    <option value="5">+ 5 acompañantes</option>
-                  </select>
-                </div>
-              )}
-
-              <div>
-                <label className="block text-sm font-medium text-[#2C2520] mb-1.5">
-                  Dedicatoria o felicitación para la abuelita Magdalena
-                </label>
-                <textarea
-                  name="mensaje"
-                  rows={3}
-                  placeholder="Escribe un mensaje bonito o un recuerdo especial con ella..."
-                  className="w-full rounded-xl border border-[#D8CEC0] bg-[#FAF7F2]/60 px-4 py-3 text-base text-[#1F1B18] focus:outline-none focus:ring-2 focus:ring-[#D61F69]"
-                />
-              </div>
-
-              <label className="flex items-center gap-2.5 text-sm text-[#5C534B] cursor-pointer">
-                <input
-                  type="checkbox"
-                  name="mostrarMuro"
-                  defaultChecked
-                  className="w-4 h-4 rounded accent-[#D61F69]"
-                />
-                Mostrar mi felicitación en el muro de recuerdos de la página
-              </label>
-
-              {state && !state.ok && (
-                <p className="text-sm text-red-600 font-medium">{state.mensaje}</p>
-              )}
-
-              <button
-                type="submit"
-                disabled={isPending}
-                className="w-full rounded-xl bg-[#D61F69] hover:bg-[#BE185D] disabled:opacity-60 text-white font-semibold py-3.5 px-6 shadow-sm transition-colors flex items-center justify-center gap-2 cursor-pointer"
+          <AnimatePresence mode="wait">
+            {state?.ok ? (
+              <motion.div
+                key="gracias"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ type: 'spring', stiffness: 220, damping: 18 }}
+                className="bg-[#FDF2F8] border border-[#D61F69]/30 rounded-2xl p-6 text-center max-w-md mx-auto"
               >
-                <Send className="w-4 h-4" />
-                {isPending ? 'Guardando...' : 'Enviar Confirmación y Saludo'}
-              </button>
-            </form>
-          )}
-        </div>
-      </div>
+                <motion.div
+                  initial={{ scale: 0, rotate: -45 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ type: 'spring', delay: 0.15, stiffness: 260, damping: 14 }}
+                >
+                  <CheckCircle2 className="w-14 h-14 text-[#D61F69] mx-auto mb-3" />
+                </motion.div>
+                <h3 className="font-serif text-2xl text-[#1F1B18] font-semibold">
+                  ¡Registro recibido!
+                </h3>
+                <p className="text-sm text-[#4A3F37] mt-2">{state.mensaje}</p>
+              </motion.div>
+            ) : (
+              <motion.form
+                key="form"
+                action={formAction}
+                exit={{ opacity: 0, y: -10 }}
+                className="space-y-5 max-w-xl mx-auto"
+              >
+                <div>
+                  <label htmlFor="nombre" className="block text-sm font-medium text-[#2C2520] mb-1.5">
+                    Tu nombre completo *
+                  </label>
+                  <input
+                    id="nombre"
+                    type="text"
+                    name="nombre"
+                    required
+                    autoComplete="name"
+                    placeholder="Ej. Familia Pérez Gómez"
+                    className={campo}
+                  />
+                </div>
 
-      {/* Muro de Felicitaciones desde Neon */}
+                <fieldset>
+                  <legend className="block text-sm font-medium text-[#2C2520] mb-2">
+                    ¿Podrás acompañarnos el sábado 23 de enero?
+                  </legend>
+                  <div className="grid grid-cols-2 gap-3">
+                    {(
+                      [
+                        { v: 'si', t: '¡Sí, ahí estaremos!', on: 'border-[#D61F69] bg-[#FDF2F8] text-[#9D174D] shadow-xs' },
+                        { v: 'no', t: 'No podré asistir', on: 'border-[#18181B] bg-[#F4F4F5] text-[#18181B] shadow-xs' },
+                      ] as const
+                    ).map((op) => (
+                      <label
+                        key={op.v}
+                        className={`cursor-pointer min-h-[3.25rem] flex items-center justify-center rounded-xl border p-3 text-center text-sm font-medium transition-all active:scale-95 ${
+                          asistira === op.v
+                            ? op.on
+                            : 'border-[#D8CEC0] text-[#5C534B] hover:bg-[#FAF7F2]'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="asistira"
+                          value={op.v}
+                          checked={asistira === op.v}
+                          onChange={() => setAsistira(op.v)}
+                          className="sr-only"
+                        />
+                        {op.t}
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+
+                <AnimatePresence initial={false}>
+                  {asistira === 'si' && (
+                    <motion.div
+                      key="acomp"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <label htmlFor="acompanantes" className="block text-sm font-medium text-[#2C2520] mb-1.5">
+                        <span className="inline-flex items-center gap-1.5">
+                          <Users className="w-4 h-4 text-[#EA580C]" />
+                          Acompañantes adicionales (sin contarte a ti)
+                        </span>
+                      </label>
+                      <select
+                        id="acompanantes"
+                        name="acompanantes"
+                        defaultValue="0"
+                        className={campo}
+                      >
+                        <option value="0">Voy solo(a)</option>
+                        <option value="1">+ 1 acompañante</option>
+                        <option value="2">+ 2 acompañantes</option>
+                        <option value="3">+ 3 acompañantes</option>
+                        <option value="4">+ 4 acompañantes</option>
+                        <option value="5">+ 5 acompañantes</option>
+                      </select>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <div>
+                  <label htmlFor="mensaje" className="block text-sm font-medium text-[#2C2520] mb-1.5">
+                    Dedicatoria o felicitación para la abuelita Magdalena
+                  </label>
+                  <textarea
+                    id="mensaje"
+                    name="mensaje"
+                    rows={4}
+                    placeholder="Escribe un mensaje bonito o un recuerdo especial con ella..."
+                    className={campo}
+                  />
+                </div>
+
+                <label className="flex items-start gap-3 text-sm text-[#5C534B] cursor-pointer py-1">
+                  <input
+                    type="checkbox"
+                    name="mostrarMuro"
+                    defaultChecked
+                    className="mt-0.5 w-5 h-5 rounded accent-[#D61F69] shrink-0"
+                  />
+                  Mostrar mi felicitación en el muro de recuerdos de la página
+                </label>
+
+                {state && !state.ok && (
+                  <p role="alert" className="text-sm text-red-600 font-medium">
+                    {state.mensaje}
+                  </p>
+                )}
+
+                <motion.button
+                  type="submit"
+                  disabled={isPending}
+                  whileTap={{ scale: 0.97 }}
+                  className="w-full rounded-xl bg-[#D61F69] hover:bg-[#BE185D] disabled:opacity-60 text-white font-semibold py-4 px-6 shadow-md transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <Send className={`w-4 h-4 ${isPending ? 'animate-pulse' : ''}`} />
+                  {isPending ? 'Guardando...' : 'Enviar Confirmación y Saludo'}
+                </motion.button>
+              </motion.form>
+            )}
+          </AnimatePresence>
+        </div>
+      </motion.div>
+
+      {/* Muro de Felicitaciones */}
       {saludos.length > 0 && (
-        <div className="mt-14">
+        <div className="mt-12 sm:mt-14">
           <h3 className="font-serif text-2xl sm:text-3xl text-center text-[#1F1B18] mb-6">
             Palabras con Cariño de la Familia
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {saludos.map((s) => (
-              <div
+            {saludos.map((s, i) => (
+              <motion.div
                 key={s.id}
-                className="bg-white/90 border border-[#E6DDD0] rounded-2xl p-5 shadow-xs relative overflow-hidden"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-30px' }}
+                transition={{ duration: 0.5, delay: (i % 2) * 0.1 }}
+                className="bg-white/90 border border-[#E6DDD0] rounded-2xl p-5 pl-6 shadow-xs relative overflow-hidden"
               >
                 <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#D61F69] via-[#EA580C] to-[#EAB308]" />
-                <p className="text-[#3B332C] italic text-sm sm:text-base leading-relaxed">
+                <p className="text-[#3B332C] italic text-sm sm:text-base leading-relaxed break-words">
                   &ldquo;{s.mensaje}&rdquo;
                 </p>
                 <p className="text-xs font-semibold uppercase tracking-wider text-[#9D174D] mt-3">
                   — {s.nombre}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
