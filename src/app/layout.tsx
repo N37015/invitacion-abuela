@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://abuelita-ashen.vercel.app'),
   title: 'Mis 74 Años · Magdalena Pacheco Roblero',
   description:
-    'Acompáñanos a celebrar los 64 años de nuestra querida abuelita Magdalena este sábado 23 de enero de 2027 en el Salón Jardín Guadalupe.',
+    'Acompáñanos a celebrar los 74 años de nuestra querida abuelita Magdalena este sábado 23 de enero de 2027 en el Salón Jardín Guadalupe.',
   openGraph: {
     title: 'Mis 74 Años · Magdalena Pacheco Roblero',
     description:
@@ -28,9 +28,18 @@ export const metadata: Metadata = {
     siteName: 'Mis 74 Años · Abuelita Magdalena',
     locale: 'es_MX',
     type: 'website',
+    images: [
+      {
+        url: '/portada.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'Invitación 74 Años · Magdalena Pacheco Roblero',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
+    images: ['/portada.jpeg'],
   },
 };
 
