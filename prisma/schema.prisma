@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Invitado {
+  id           String   @id @default(cuid())
+  nombre       String
+  asistira     Boolean  @default(true)
+  acompanantes Int      @default(0)
+  mensaje      String?  @db.Text
+  mostrarMuro  Boolean  @default(true)
+  creadoEn     DateTime @default(now())
+}
+
+model Recuerdo {
+  id          String    @id @default(cuid())
+  titulo      String?
+  descripcion String?
+  anio        String?
+  tipo        TipoMedia @default(FOTO)
+  url         String
+  publicId    String?
+  orden       Int       @default(0)
+  creadoEn    DateTime  @default(now())
+}
+
+enum TipoMedia {
+  FOTO
+  VIDEO
+}
