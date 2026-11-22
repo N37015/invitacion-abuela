@@ -104,7 +104,7 @@ export default function SeccionRsvp({
                     name="nombre"
                     required
                     autoComplete="name"
-                    placeholder="Ej. Familia Pérez Gómez"
+                    placeholder=""
                     className={campo}
                   />
                 </div>
@@ -116,7 +116,7 @@ export default function SeccionRsvp({
                   <div className="grid grid-cols-2 gap-3">
                     {(
                       [
-                        { v: 'si', t: '¡Sí, ahí estaremos!', on: 'border-[#D61F69] bg-[#FDF2F8] text-[#9D174D] shadow-xs' },
+                        { v: 'si', t: '¡Sí, ahí estare!', on: 'border-[#D61F69] bg-[#FDF2F8] text-[#9D174D] shadow-xs' },
                         { v: 'no', t: 'No podré asistir', on: 'border-[#18181B] bg-[#F4F4F5] text-[#18181B] shadow-xs' },
                       ] as const
                     ).map((op) => (
@@ -153,24 +153,8 @@ export default function SeccionRsvp({
                       className="overflow-hidden"
                     >
                       <label htmlFor="acompanantes" className="block text-sm font-medium text-[#2C2520] mb-1.5">
-                        <span className="inline-flex items-center gap-1.5">
-                          <Users className="w-4 h-4 text-[#EA580C]" />
-                          Acompañantes adicionales (sin contarte a ti)
-                        </span>
                       </label>
-                      <select
-                        id="acompanantes"
-                        name="acompanantes"
-                        defaultValue="0"
-                        className={campo}
-                      >
-                        <option value="0">Voy solo(a)</option>
-                        <option value="1">+ 1 acompañante</option>
-                        <option value="2">+ 2 acompañantes</option>
-                        <option value="3">+ 3 acompañantes</option>
-                        <option value="4">+ 4 acompañantes</option>
-                        <option value="5">+ 5 acompañantes</option>
-                      </select>
+                     
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -188,16 +172,6 @@ export default function SeccionRsvp({
                   />
                 </div>
 
-                <label className="flex items-start gap-3 text-sm text-[#5C534B] cursor-pointer py-1">
-                  <input
-                    type="checkbox"
-                    name="mostrarMuro"
-                    defaultChecked
-                    className="mt-0.5 w-5 h-5 rounded accent-[#D61F69] shrink-0"
-                  />
-                  Mostrar mi felicitación en el muro de recuerdos de la página
-                </label>
-
                 {state && !state.ok && (
                   <p role="alert" className="text-sm text-red-600 font-medium">
                     {state.mensaje}
@@ -211,42 +185,13 @@ export default function SeccionRsvp({
                   className="w-full rounded-xl bg-[#D61F69] hover:bg-[#BE185D] disabled:opacity-60 text-white font-semibold py-4 px-6 shadow-md transition-colors flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Send className={`w-4 h-4 ${isPending ? 'animate-pulse' : ''}`} />
-                  {isPending ? 'Guardando...' : 'Enviar Confirmación y Saludo'}
+                  {isPending ? 'Guardando...' : 'Enviar Confirmación'}
                 </motion.button>
               </motion.form>
             )}
           </AnimatePresence>
         </div>
       </motion.div>
-
-      {/* Muro de Felicitaciones */}
-      {saludos.length > 0 && (
-        <div className="mt-12 sm:mt-14">
-          <h3 className="font-serif text-2xl sm:text-3xl text-center text-[#1F1B18] mb-6">
-            Palabras con Cariño de la Familia
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {saludos.map((s, i) => (
-              <motion.div
-                key={s.id}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-30px' }}
-                transition={{ duration: 0.5, delay: (i % 2) * 0.1 }}
-                className="bg-white/90 border border-[#E6DDD0] rounded-2xl p-5 pl-6 shadow-xs relative overflow-hidden"
-              >
-                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#D61F69] via-[#EA580C] to-[#EAB308]" />
-                <p className="text-[#3B332C] italic text-sm sm:text-base leading-relaxed break-words">
-                  &ldquo;{s.mensaje}&rdquo;
-                </p>
-                <p className="text-xs font-semibold uppercase tracking-wider text-[#9D174D] mt-3">
-                  — {s.nombre}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      )}
     </section>
   );
 }

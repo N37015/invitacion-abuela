@@ -60,7 +60,7 @@ export default async function HomePage() {
         <Reveal y={-16}>
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#18181B] text-[#FAF7F2] text-[11px] sm:text-xs uppercase tracking-[0.22em] mb-7 shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-[#EAB308]" />
-            Celebración Especial · Chiapas
+            Celebración Especial
           </div>
         </Reveal>
 
