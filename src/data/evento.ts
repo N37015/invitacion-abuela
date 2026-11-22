@@ -15,17 +15,17 @@ export const DATOS_EVENTO = {
   frasePrincipal:
     'Setenta y cuatro años de amor, sabiduría y sonrisas que iluminan nuestra familia. Queremos celebrar tu vida rodeados de quienes más te quieren.',
   // Fecha de la fiesta: Sábado 23 de enero de 2027 a las 4:00 PM (hora centro México)
-  fechaISO: '2027-01-23T16:00:00-06:00',
+ fechaISO: '2027-01-23T14:00:00-06:00',
   fechaTexto: 'Sábado 23 de Enero de 2027',
   cumpleRealTexto: 'En honor a su cumpleaños el 25 de enero',
-  horaTexto: '4:00 PM',
+  horaTexto: '2:00 PM',
   lugar: {
     nombre: 'Salón Jardín Guadalupe',
     ciudad: 'Ocozocoautla de Espinosa, Chiapas',
     referencia: 'Recepción y convivencia familiar',
     // Cuando tengas el link exacto de Google Maps, pégalo aquí:
     googleMapsUrl:
-      'https://www.google.com/maps/search/?api=1&query=Salon+Jardin+Guadalupe+Ocozocoautla+Chiapas',
+      'https://www.google.com/maps/place/PLAZA+FLOR+DE+PINA/@16.6254327,-93.3372397,17z/data=!3m1!4b1!4m6!3m5!1s0x85ecceb565c800e9:0x4e636cc616adc419!8m2!3d16.6254327!4d-93.3372397!16s%2Fg%2F11vw_wyjmy?entry=ttu&g_ep=EgoyMDI2MTExOC4xIKXMDSoASAFQAw%3D%3D',
   },
   // Foto principal de portada (cuando la subas a Cloudinary, pon su publicId aquí)
   fotoPortadaPublicId: '',

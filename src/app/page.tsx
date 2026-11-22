@@ -17,9 +17,9 @@ export const dynamic = 'force-dynamic';
  * Si no quieres mostrar alguna, deja su valor como '' y esa sección no aparece.
  */
 const FOTOS = {
-  portada: '/fotos/portada.jpg', // retrato (cuadrada o vertical)
+  portada: '/fotos/portada.jpeg', // retrato (cuadrada o vertical)
   sobreMi: '/fotos/sobre.jpg',
-  salon: '/fotos/salon.jpg',
+  salon: '/fotos/salon.jpeg',
 };
 
 export default async function HomePage() {
@@ -197,21 +197,7 @@ export default async function HomePage() {
               ))}
             </div>
 
-            {FOTOS.salon && (
-              <div className="relative mt-8 h-52 sm:h-64 rounded-2xl overflow-hidden border border-white/10">
-                <Image
-                  src={FOTOS.salon}
-                  alt={DATOS_EVENTO.lugar.nombre}
-                  fill
-                  sizes="(max-width: 896px) 100vw, 800px"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <p className="absolute bottom-3 left-4 font-serif text-lg">
-                  {DATOS_EVENTO.lugar.nombre}
-                </p>
-              </div>
-            )}
+          
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
               <a
@@ -229,7 +215,9 @@ export default async function HomePage() {
         </Reveal>
       </section>
 
-      
+      {/* ───────────── GALERÍA ───────────── */}
+      <GaleriaRecuerdos recuerdos={recuerdosMostrar} />
+
       {/* ───────────── RSVP Y MURO ───────────── */}
       <SeccionRsvp saludos={saludos} />
 
