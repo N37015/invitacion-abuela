@@ -17,15 +17,15 @@ const jakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://abuelita-ashen.vercel.app'),
-  title: 'Mis 74 Años · Magdalena Pacheco Roblero',
+  title: 'Mis 73 Años · Magdalena Pacheco Roblero',
   description:
     'Acompáñanos a celebrar los 74 años de nuestra querida abuelita Magdalena este sábado 23 de enero de 2027 en el Salón Jardín Guadalupe.',
   openGraph: {
-    title: 'Mis 74 Años · Magdalena Pacheco Roblero',
+    title: 'Mis 73 Años · Magdalena Pacheco Roblero',
     description:
       'Sábado 23 de enero de 2027 · 2:00 PM · Salón Jardín Guadalupe, Ocozocoautla, Chiapas.',
     url: 'https://abuelita-ashen.vercel.app',
-    siteName: 'Mis 74 Años · Abuelita Magdalena',
+    siteName: 'Mis 73 Años · Abuelita Magdalena',
     locale: 'es_MX',
     type: 'website',
     images: [
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
         url: '/portada.jpeg',
         width: 1200,
         height: 630,
-        alt: 'Invitación 74 Años · Magdalena Pacheco Roblero',
+        alt: 'Invitación 73 Años · Magdalena Pacheco Roblero',
       },
     ],
   },

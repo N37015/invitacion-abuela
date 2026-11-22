@@ -11,7 +11,7 @@ export interface MediaRecuerdo {
 export const DATOS_EVENTO = {
   nombreCorto: 'Abuelita Magdalena',
   nombreCompleto: 'Magdalena Pacheco Roblero',
-  edad: 74,
+  edad: 73,
   frasePrincipal:
     'Setenta y cuatro años de amor, sabiduría y sonrisas que iluminan nuestra familia. Queremos celebrar tu vida rodeados de quienes más te quieren.',
   // Fecha de la fiesta: Sábado 23 de enero de 2027 a las 4:00 PM (hora centro México)
