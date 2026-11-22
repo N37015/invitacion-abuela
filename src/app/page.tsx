@@ -35,17 +35,14 @@ export default async function HomePage() {
     }),
   ]);
 
-  const recuerdosMostrar =
-    recuerdosDB.length > 0
-      ? recuerdosDB.map((r) => ({
-          id: r.id,
-          tipo: r.tipo === 'VIDEO' ? ('video' as const) : ('foto' as const),
-          cloudinaryPublicId: r.publicId || '',
-          titulo: r.titulo || 'Recuerdo especial',
-          anio: r.anio || undefined,
-          descripcion: r.descripcion || undefined,
-        }))
-      : DATOS_EVENTO.recuerdos;
+ const recuerdosMostrar = recuerdosDB.map((r) => ({
+    id: r.id,
+    tipo: r.tipo === 'VIDEO' ? ('video' as const) : ('foto' as const),
+    cloudinaryPublicId: r.publicId || '',
+    titulo: r.titulo || 'Recuerdo especial',
+    anio: r.anio || undefined,
+    descripcion: r.descripcion || undefined,
+  }));
 
   return (
     <main className="relative min-h-screen flex flex-col">

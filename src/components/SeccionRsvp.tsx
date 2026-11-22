@@ -3,7 +3,7 @@
 import { useActionState, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
-import { CheckCircle2, Heart, Send, Users } from 'lucide-react';
+import { CheckCircle2, Heart, Send } from 'lucide-react';
 import { registrarConfirmacion, EstadoRsvp } from '@/app/actions';
 
 interface SaludoPublico {
@@ -104,7 +104,7 @@ export default function SeccionRsvp({
                     name="nombre"
                     required
                     autoComplete="name"
-                    placeholder=""
+                    placeholder="Escribe tu nombre completo"
                     className={campo}
                   />
                 </div>
@@ -116,7 +116,7 @@ export default function SeccionRsvp({
                   <div className="grid grid-cols-2 gap-3">
                     {(
                       [
-                        { v: 'si', t: '¡Sí, ahí estare!', on: 'border-[#D61F69] bg-[#FDF2F8] text-[#9D174D] shadow-xs' },
+                        { v: 'si', t: '¡Sí, ahí estaré!', on: 'border-[#D61F69] bg-[#FDF2F8] text-[#9D174D] shadow-xs' },
                         { v: 'no', t: 'No podré asistir', on: 'border-[#18181B] bg-[#F4F4F5] text-[#18181B] shadow-xs' },
                       ] as const
                     ).map((op) => (
@@ -142,35 +142,30 @@ export default function SeccionRsvp({
                   </div>
                 </fieldset>
 
+                {/* Solo se muestra si elige "¡Sí, ahí estaré!" */}
                 <AnimatePresence initial={false}>
                   {asistira === 'si' && (
                     <motion.div
-                      key="acomp"
+                      key="bloque-mensaje"
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <label htmlFor="acompanantes" className="block text-sm font-medium text-[#2C2520] mb-1.5">
+                      <label htmlFor="mensaje" className="block text-sm font-medium text-[#2C2520] mb-1.5">
+                        Mensaje para la abuelita Magdalena
                       </label>
-                     
+                      <textarea
+                        id="mensaje"
+                        name="mensaje"
+                        rows={4}
+                        placeholder="Escribe un mensaje bonito para nuestra abuelita..."
+                        className={campo}
+                      />
                     </motion.div>
                   )}
                 </AnimatePresence>
-
-                <div>
-                  <label htmlFor="mensaje" className="block text-sm font-medium text-[#2C2520] mb-1.5">
-                    Dedicatoria o felicitación para la abuelita Magdalena
-                  </label>
-                  <textarea
-                    id="mensaje"
-                    name="mensaje"
-                    rows={4}
-                    placeholder="Escribe un mensaje bonito o un recuerdo especial con ella..."
-                    className={campo}
-                  />
-                </div>
 
                 {state && !state.ok && (
                   <p role="alert" className="text-sm text-red-600 font-medium">
@@ -185,7 +180,7 @@ export default function SeccionRsvp({
                   className="w-full rounded-xl bg-[#D61F69] hover:bg-[#BE185D] disabled:opacity-60 text-white font-semibold py-4 px-6 shadow-md transition-colors flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Send className={`w-4 h-4 ${isPending ? 'animate-pulse' : ''}`} />
-                  {isPending ? 'Guardando...' : 'Enviar Confirmación'}
+                  {isPending ? 'Guardando...' : 'Enviar'}
                 </motion.button>
               </motion.form>
             )}
