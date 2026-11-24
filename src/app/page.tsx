@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Calendar, CalendarPlus, Clock, MapPin, Sparkles, Heart } from 'lucide-react';
+import { Calendar, Clock, MapPin, Sparkles, Heart } from 'lucide-react';
 import { prisma } from '@/lib/prisma';
 import { DATOS_EVENTO } from '@/data/evento';
 import CuentaRegresiva from '@/components/CuentaRegresiva';
@@ -9,6 +9,8 @@ import Reveal from '@/components/Reveal';
 import Petalos from '@/components/Petalos';
 import BarraConfirmar from '@/components/BarraConfirmar';
 import ReproductorMusica from '@/components/ReproductorMusica';
+import IndicadorScroll from '@/components/IndicadorScroll';
+
 export const dynamic = 'force-dynamic';
 
 /**
@@ -35,7 +37,7 @@ export default async function HomePage() {
     }),
   ]);
 
- const recuerdosMostrar = recuerdosDB.map((r) => ({
+  const recuerdosMostrar = recuerdosDB.map((r) => ({
     id: r.id,
     tipo: r.tipo === 'VIDEO' ? ('video' as const) : ('foto' as const),
     cloudinaryPublicId: r.publicId || '',
@@ -53,9 +55,9 @@ export default async function HomePage() {
       <div className="relative z-10 h-2.5 w-full borde-chiapaneca" />
 
       {/* ───────────── HERO ───────────── */}
-      <header className="relative z-10 pt-10 sm:pt-14 pb-14 px-4 text-center max-w-4xl mx-auto w-full">
+      <header className="relative z-10 min-h-[88svh] flex flex-col justify-center pt-8 sm:pt-12 pb-8 px-4 text-center max-w-4xl mx-auto w-full">
         <Reveal y={-16}>
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#18181B] text-[#FAF7F2] text-[11px] sm:text-xs uppercase tracking-[0.22em] mb-7 shadow-xs">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#18181B] text-[#FAF7F2] text-[11px] sm:text-xs uppercase tracking-[0.22em] mb-6 shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-[#EAB308]" />
             Celebración Especial
           </div>
@@ -63,7 +65,7 @@ export default async function HomePage() {
 
         {FOTOS.portada && (
           <Reveal scale={0.9} delay={0.1}>
-            <div className="relative mx-auto mb-8 w-48 h-48 sm:w-60 sm:h-60">
+            <div className="relative mx-auto mb-6 w-44 h-44 sm:w-56 sm:h-56">
               <div
                 className="absolute -inset-2 rounded-full animate-[spin_14s_linear_infinite]"
                 style={{
@@ -77,7 +79,7 @@ export default async function HomePage() {
                 alt={DATOS_EVENTO.nombreCompleto}
                 fill
                 priority
-                sizes="(max-width: 640px) 192px, 240px"
+                sizes="(max-width: 640px) 176px, 224px"
                 className="rounded-full object-cover shadow-xl"
               />
             </div>
@@ -88,7 +90,7 @@ export default async function HomePage() {
           <p className="font-serif italic text-xl sm:text-2xl text-[#D61F69]">
             Celebrando sus
           </p>
-          <p className="font-serif font-bold leading-none text-[5.5rem] sm:text-[8rem] texto-brillo flotar">
+          <p className="font-serif font-bold leading-none text-[5rem] sm:text-[7.5rem] texto-brillo flotar">
             {DATOS_EVENTO.edad}
           </p>
           <p className="font-serif italic text-xl sm:text-2xl text-[#D61F69] -mt-1">
@@ -97,13 +99,13 @@ export default async function HomePage() {
         </Reveal>
 
         <Reveal delay={0.3}>
-          <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-semibold text-[#18181B] mt-5 leading-tight text-balance">
+          <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-semibold text-[#18181B] mt-4 leading-tight text-balance">
             {DATOS_EVENTO.nombreCompleto}
           </h1>
         </Reveal>
 
         <Reveal delay={0.4}>
-          <div className="flex items-center justify-center gap-2 my-6">
+          <div className="flex items-center justify-center gap-2 my-5">
             <span className="h-px w-10 bg-[#D61F69]/40" />
             {['#D61F69', '#EA580C', '#EAB308', '#15803D', '#0284C7'].map((c, i) => (
               <span
@@ -121,18 +123,22 @@ export default async function HomePage() {
         </Reveal>
 
         <Reveal delay={0.5}>
-          <div className="mt-10">
+          <div className="mt-8">
             <p className="text-xs uppercase tracking-[0.2em] text-[#6E6259] mb-4 font-semibold">
               Faltan para el gran día
             </p>
             <CuentaRegresiva fechaISO={DATOS_EVENTO.fechaISO} />
+            <IndicadorScroll targetId="siguiente-seccion" />
           </div>
         </Reveal>
       </header>
 
       {/* ───────────── SOBRE EL FESTEJADO/A ───────────── */}
       {FOTOS.sobreMi && (
-        <section className="relative z-10 px-4 py-6 max-w-4xl mx-auto w-full">
+        <section
+          id="siguiente-seccion"
+          className="relative z-10 px-4 py-6 max-w-4xl mx-auto w-full scroll-mt-4"
+        >
           <Reveal>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-6 items-center bg-white border border-[#E6DDD0] rounded-3xl overflow-hidden shadow-sm">
               <div className="relative h-72 md:h-full md:min-h-[320px]">
@@ -160,7 +166,10 @@ export default async function HomePage() {
       )}
 
       {/* ───────────── DETALLES DEL EVENTO ───────────── */}
-      <section className="relative z-10 px-4 py-8 max-w-4xl mx-auto w-full">
+      <section
+        id={!FOTOS.sobreMi ? 'siguiente-seccion' : undefined}
+        className="relative z-10 px-4 py-8 max-w-4xl mx-auto w-full scroll-mt-4"
+      >
         <Reveal>
           <div className="bg-[#18181B] text-[#FAF7F2] rounded-3xl p-6 pt-9 sm:p-10 shadow-lg relative overflow-hidden">
             <div className="h-1.5 w-full borde-chiapaneca absolute top-0 left-0" />
@@ -194,8 +203,6 @@ export default async function HomePage() {
               ))}
             </div>
 
-          
-
             <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href={DATOS_EVENTO.lugar.googleMapsUrl}
@@ -206,7 +213,6 @@ export default async function HomePage() {
                 <MapPin className="w-4 h-4" />
                 Ver Ubicación en Google Maps
               </a>
-             
             </div>
           </div>
         </Reveal>
@@ -219,7 +225,6 @@ export default async function HomePage() {
       <SeccionRsvp saludos={saludos} />
 
       <ReproductorMusica src="/musica.mp3" />
-
     </main>
   );
 }
