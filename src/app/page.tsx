@@ -223,8 +223,10 @@ export default async function HomePage() {
 
       {/* ───────────── RSVP Y MURO ───────────── */}
       <SeccionRsvp saludos={saludos} />
+     
 
       <ReproductorMusica src="/musica.mp3" />
+       <IndicadorScroll targetId="siguiente-seccion" />
     </main>
   );
 }

@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronsDown } from 'lucide-react';
 
 export default function IndicadorScroll({
-  targetId = 'detalles-evento',
+  targetId = 'siguiente-seccion',
 }: {
   targetId?: string;
 }) {
@@ -13,8 +13,7 @@ export default function IndicadorScroll({
 
   useEffect(() => {
     const manejarScroll = () => {
-      // Se oculta en cuanto el usuario baja más de 60px
-      if (window.scrollY > 60) {
+      if (window.scrollY > 50) {
         setVisible(false);
       } else {
         setVisible(true);
@@ -37,32 +36,32 @@ export default function IndicadorScroll({
   return (
     <AnimatePresence>
       {visible && (
-        <motion.button
-          type="button"
-          onClick={bajarSuave}
-          initial={{ opacity: 0, y: 10 }}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 10 }}
+          exit={{ opacity: 0, y: 24 }}
           transition={{ duration: 0.35 }}
-          aria-label="Desliza hacia abajo para ver la invitación"
-          className="mt-6 inline-flex flex-col items-center gap-1 text-[#5C534B] hover:text-[#D61F69] transition-colors cursor-pointer group"
+          className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 pointer-events-none"
         >
-          <span className="text-[11px] font-medium uppercase tracking-[0.2em]">
-            Desliza hacia abajo
-          </span>
-
-          <motion.span
-            animate={{ y: [0, 6, 0] }}
+          <motion.button
+            type="button"
+            onClick={bajarSuave}
+            animate={{ y: [0, -7, 0] }}
             transition={{
-              duration: 1.5,
+              duration: 1.2,
               repeat: Infinity,
               ease: 'easeInOut',
             }}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-[#D61F69]/30 bg-white/80 text-[#D61F69] shadow-xs group-hover:bg-[#D61F69] group-hover:text-white transition-colors"
+            aria-label="Desliza hacia abajo para ver más información"
+            className="pointer-events-auto inline-flex items-center gap-2.5 rounded-full bg-[#D61F69] hover:bg-[#BE185D] text-white border-2 border-[#EAB308] px-5 py-3 shadow-2xl shadow-[#D61F69]/50 cursor-pointer active:scale-95"
           >
-            <ChevronsDown className="w-4 h-4" />
-          </motion.span>
-        </motion.button>
+            <ChevronsDown className="w-5 h-5 text-[#EAB308] shrink-0" />
+            <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] whitespace-nowrap">
+              Desliza para ver más
+            </span>
+            <ChevronsDown className="w-5 h-5 text-[#EAB308] shrink-0" />
+          </motion.button>
+        </motion.div>
       )}
     </AnimatePresence>
   );
