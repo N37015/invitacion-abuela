@@ -8,7 +8,7 @@ import SeccionRsvp from '@/components/SeccionRsvp';
 import Reveal from '@/components/Reveal';
 import Petalos from '@/components/Petalos';
 import BarraConfirmar from '@/components/BarraConfirmar';
-
+import ReproductorMusica from '@/components/ReproductorMusica';
 export const dynamic = 'force-dynamic';
 
 /**
@@ -217,6 +217,8 @@ export default async function HomePage() {
 
       {/* ───────────── RSVP Y MURO ───────────── */}
       <SeccionRsvp saludos={saludos} />
+
+      <ReproductorMusica src="/musica.mp3" />
 
     </main>
   );
