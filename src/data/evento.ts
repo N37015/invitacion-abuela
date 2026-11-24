@@ -17,7 +17,7 @@ export const DATOS_EVENTO = {
   // Fecha de la fiesta: Sábado 23 de enero de 2027 a las 4:00 PM (hora centro México)
  fechaISO: '2027-01-23T14:00:00-06:00',
   fechaTexto: 'Sábado 23 de Enero de 2027',
-  cumpleRealTexto: 'En honor a su cumpleaños el 25 de enero',
+  cumpleRealTexto: 'En honor a su cumpleaños el 24 de enero',
   horaTexto: '2:00 PM',
   lugar: {
     nombre: 'Salón Jardín Guadalupe',
