@@ -118,14 +118,6 @@ export default function ReproductorMusica({
         aria-label={reproduciendo ? 'Pausar música' : 'Reproducir música'}
         className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-40 inline-flex items-center gap-2 rounded-full bg-[#18181B]/95 hover:bg-[#D61F69] text-[#FAF7F2] border border-[#EAB308]/60 px-4 py-2.5 shadow-xl backdrop-blur-xs transition-all cursor-pointer active:scale-95"
       >
-        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#D61F69]/25 text-[#EAB308]">
-          <Music className={`w-3.5 h-3.5 ${reproduciendo ? 'animate-pulse' : ''}`} />
-        </span>
-
-        <span className="text-xs font-semibold tracking-wide">
-          {reproduciendo ? 'Sonando' : 'Música'}
-        </span>
-
         {reproduciendo ? (
           <Pause className="w-3.5 h-3.5 text-[#EAB308]" />
         ) : (
