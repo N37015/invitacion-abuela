@@ -13,7 +13,7 @@ export const DATOS_EVENTO = {
   nombreCompleto: 'Magdalena Pacheco Roblero',
   edad: 73,
   frasePrincipal:
-    'Setenta y cuatro años de amor, sabiduría y sonrisas que iluminan nuestra familia. Queremos celebrar tu vida rodeados de quienes más te quieren.',
+    'Setenta y tres años de amor, sabiduría y sonrisas que iluminan nuestra familia. Queremos celebrar tu vida rodeados de quienes más te quieren.',
   // Fecha de la fiesta: Sábado 23 de enero de 2027 a las 4:00 PM (hora centro México)
  fechaISO: '2027-01-23T14:00:00-06:00',
   fechaTexto: 'Sábado 23 de Enero de 2027',
